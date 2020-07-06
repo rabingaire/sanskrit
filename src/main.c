@@ -2,7 +2,7 @@
 #include "lexer.h"
 
 int main(int argc, char** argv) {
-  char* input = "let a = (1 + 1); fn hello(){};";
+  char* input = "let a: int = (1 + 1); fn hello(a: int, b: int){ return a + b };";
 
   Lexer* lex = new_lexer(input);
 

@@ -6,13 +6,14 @@ typedef enum {
   EOFF,
 
   IDENT,
-  INT,
+  NUMBER,
 
   ASSIGN,
   PLUS,
 
   COMMA,
   SEMICOLON,
+  COLON,
 
   LPAREN,
   RPAREN,
@@ -20,7 +21,9 @@ typedef enum {
   RBRACE,
 
   FUNCTION,
-  LET
+  LET,
+  INT,
+  RETURN,
 } TokenType;
 
 #endif 
