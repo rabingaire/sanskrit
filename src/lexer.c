@@ -51,3 +51,53 @@ int read_number(Lexer* lex) {
   }
   return integer;
 }
+
+void skip_whitespace(Lexer* lex) {
+	while(lex->character == ' ' || lex->character == '\t' || lex->character == '\n' || lex->character == '\r') {
+		read_character(lex);
+	}
+}
+
+Token next_token(Lexer* lex) {
+  skip_whitespace(lex);
+
+  switch(lex->character) {
+    case '=': {
+      return new_token(ASSIGN, "=");
+    }
+    case '+': {
+      return new_token(PLUS, "+");
+    }
+    case ';': {
+      return new_token(SEMICOLON, ";");
+    }
+    case '(': {
+      return new_token(LPAREN, "(");
+    }
+    case ')': {
+      return new_token(RPAREN, ")");
+    }
+    case '{': {
+      return new_token(LBRACE, "{");
+    }
+    case '}': {
+      return new_token(RBRACE, "}");
+    }
+    default: {
+      if(isalpha(lex->character)) {
+        char* ident = read_ident(lex);
+        return new_token(IDENT, ident);
+      }
+      
+      if(isdigit(lex->character)) {
+        int integer = read_number(lex);
+        char* literal = NULL;
+        asprintf(&literal, "%d", integer);
+        return new_token(INT, literal);
+      }
+      
+      printf("<INVALID> char %c, at %zu\n", lex->character, lex->position);
+      exit(1);
+    }
+  }
+}

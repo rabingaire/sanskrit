@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "utils.h"
+#include "token.h"
 
 typedef struct {
   char* input;
@@ -24,5 +25,9 @@ char peek_character(Lexer*);
 char* read_ident(Lexer*);
 
 int read_number(Lexer*);
+
+void skip_whitespace(Lexer*);
+
+Token next_token(Lexer*);
 
 #endif
