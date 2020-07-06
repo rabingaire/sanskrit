@@ -2,6 +2,8 @@
 
 Sanskrit is a low level general purpose programming language
 
+_Note: This programming language is in development phase, trying to write parser right now_
+
 # Language Syntax
 
 Variable Declaration
