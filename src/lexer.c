@@ -116,6 +116,11 @@ Token next_token(Lexer* lex) {
           break;
         }
 
+        if(!strncmp(ident, "void", 4)) {
+          token = new_token(VOID, ident);
+          break;
+        }
+
         token = new_token(IDENT, ident);
         break;
       }

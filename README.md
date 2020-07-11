@@ -60,7 +60,7 @@ for index, number := range 10 {
 }
 ```
 
-Function Defination
+Function Definition
 
 ```
 

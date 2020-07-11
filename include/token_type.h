@@ -21,6 +21,7 @@ typedef enum {
   LET,
   INT,
   RETURN,
+  VOID,
 
   ILLEGAL,
   EOFF,
