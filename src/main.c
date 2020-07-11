@@ -7,17 +7,19 @@ int main(int argc, char** argv) {
   char* fileName = argv[1];
 
   if (argc < 2 && fileName == NULL) {
-    printf("no sanskrit file listed\n");
-    exit(NO_SOURCE_FILE);
+    fatalf(NO_SOURCE_FILE, "no sanskrit file listed\n"); 
   }
 
   char* input = read_from_file(fileName);
 
   Lexer* lex = new_lexer(input);
 
-  while(read_character(lex)) {
+  while(true) {
     Token token = next_token(lex);
     printf("Token type: %u \t Token literal: %s\n", token.type, token.literal);
+    if(token.type == EOFF) {
+      break;
+    } 
   }
 
   return 0;

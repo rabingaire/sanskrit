@@ -3,22 +3,16 @@
 Lexer* new_lexer(char* input) {
   Lexer* lex = (Lexer*)malloc(sizeof(Lexer));
   lex->input = input;
-  
   lex->position = 0;
-  lex->read_position = 0;
-
-  lex->line_number = 1;
-  lex->column_number = 0;
-  
-  lex->character = 0;
+  lex->read_position = 1;
+  lex->character = lex->input[lex->position];
   return lex;
 }
 
 char read_character(Lexer* lex) {
-  lex->character = lex->input[lex->read_position];
   lex->position = lex->read_position;
   lex->read_position++;
-  lex->column_number++;
+  lex->character = lex->input[lex->position];
   return lex->character;
 }
 
@@ -39,96 +33,103 @@ char* read_ident(Lexer* lex) {
   return ident;
 }
 
-int read_number(Lexer* lex) {
-  int integer = 0;
+char* read_number(Lexer* lex) {
+  char* ident = "";
   while(true) {
-    integer *= 10;
-    integer += lex->character - '0';
+    ident = append(ident, &lex->character);
     if(!isdigit(peek_character(lex))) {
       break;
     }
     read_character(lex);
   }
-  return integer;
+  return ident;
 }
 
 void skip_whitespace(Lexer* lex) {
 	while(lex->character == ' ' || lex->character == '\t' || lex->character == '\n' || lex->character == '\r') {
-		if (lex->character == '\n') {
-      lex->line_number++;
-      lex->column_number = 0;
-    }
     read_character(lex);
 	}
 }
 
 Token next_token(Lexer* lex) {
+  Token token;
+
   skip_whitespace(lex);
 
   switch(lex->character) {
     case '=': {
-      return new_token(ASSIGN, "=");
+      token = new_token(ASSIGN, "=");
+      break;
     }
     case '+': {
-      return new_token(PLUS, "+");
+      token = new_token(PLUS, "+");
+      break;
     }
     case ';': {
-      return new_token(SEMICOLON, ";");
+      token = new_token(SEMICOLON, ";");
+      break;
     }
     case '(': {
-      return new_token(LPAREN, "(");
+      token = new_token(LPAREN, "(");
+      break;
     }
     case ')': {
-      return new_token(RPAREN, ")");
+      token = new_token(RPAREN, ")");
+      break;
     }
     case '{': {
-      return new_token(LBRACE, "{");
+      token = new_token(LBRACE, "{");
+      break;
     }
     case '}': {
-      return new_token(RBRACE, "}");
+      token = new_token(RBRACE, "}");
+      break;
     }
     case ':': {
-      return new_token(COLON, ":");
+      token = new_token(COLON, ":");
+      break;
     }
     case ',': {
-      return new_token(COMMA, ",");
+      token = new_token(COMMA, ",");
+      break;
     }
     case 0: {
-      return new_token(EOFF, "");
+      token = new_token(EOFF, "EOF");
+      break;
     }
     default: {
       if(isalpha(lex->character)) {
         char* ident = read_ident(lex);
 
         if(!strncmp(ident, "let", 3)) {
-          return new_token(LET, ident);
+          token = new_token(LET, ident);
+          break;
         }
 
         if(!strncmp(ident, "int", 3)) {
-          return new_token(INT, ident);
+          token = new_token(INT, ident);
+          break;
         }
 
         if(!strncmp(ident, "return", 6)) {
-          return new_token(RETURN, ident);
+          token = new_token(RETURN, ident);
+          break;
         }
 
-        return new_token(IDENT, ident);
+        token = new_token(IDENT, ident);
+        break;
       }
       
       if(isdigit(lex->character)) {
-        int integer = read_number(lex);
-        char* literal = NULL;
-        asprintf(&literal, "%d", integer);
-        return new_token(NUMBER, literal);
+        char* integer = read_number(lex);
+        token = new_token(NUMBER, integer);
+        break;
       }
-      
-      printf(
-        "<INVALID> char '%c', at line: %zu, column: %zu, position: %zu\n",
-        lex->character, lex->line_number,
-        lex->column_number,
-        lex->position + 1
-      );
-      exit(INVALID_CHARACTER);
+
+      token = new_token(ILLEGAL, append("", &lex->character));
+      break;
     }
   }
+  read_character(lex);
+  return token;
 }

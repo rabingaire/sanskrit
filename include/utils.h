@@ -5,11 +5,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdarg.h>
 
 #include "error_codes.h"
 
-char* append(char*, char*);
-char* read_from_file(char*);
+char* append(const char*, const char*);
+char* read_from_file(const char*);
+void fatalf(const int, const char*, ...);
 
 #define MAX(x, y) ((x) >= (y) ? (x) : (y))
 

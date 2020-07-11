@@ -14,8 +14,6 @@ typedef struct {
   char* input;
   size_t position;
   size_t read_position;
-  size_t line_number;
-  size_t column_number;
   char character;
 } Lexer;
 
@@ -27,7 +25,7 @@ char peek_character(Lexer*);
 
 char* read_ident(Lexer*);
 
-int read_number(Lexer*);
+char* read_number(Lexer*);
 
 void skip_whitespace(Lexer*);
 
