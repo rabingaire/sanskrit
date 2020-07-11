@@ -66,6 +66,26 @@ Token next_token(Lexer* lex) {
       }
       break;
     }
+    case '&': {
+      if(peek_character(lex) == '&') {
+        token = new_token(AND, "&&");
+        read_character(lex);
+      } else {
+        // Single & character is illegal for now
+        token = new_token(ILLEGAL, append("", &lex->character));
+      }
+      break;
+    }
+    case '|': {
+      if(peek_character(lex) == '|') {
+        token = new_token(OR, "||");
+        read_character(lex);
+      } else {
+        // Single & character is illegal for now
+        token = new_token(ILLEGAL, append("", &lex->character));
+      }
+      break;
+    }
     case '+': {
       if(peek_character(lex) == '+') {
         token = new_token(INCREMENT, "++");

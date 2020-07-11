@@ -5,6 +5,8 @@ typedef enum {
   ASSIGN,
   EQUAL,
   NOT_EQUAL,
+  AND,
+  OR,
 
   PLUS,
   MINUS,
