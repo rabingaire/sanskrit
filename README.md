@@ -9,6 +9,10 @@ _Note: This programming language is in development phase, trying to write parser
 Source Code -> Lexer -> Parser(recursive descent) -> LLVM -> Executable
 .sk file -> Tokens -> AST -> .o file -> executable
 
+# Parser implementation
+
+Parser will be handwritten recursive descent parser, although for better understanding of parser rules I will write and add EBNB grammers rules.
+
 # Language Syntax
 
 Variable Declaration
