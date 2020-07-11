@@ -101,6 +101,7 @@ Token next_token(Lexer* lex) {
       if(isalpha(lex->character)) {
         char* ident = read_ident(lex);
 
+        // TODO: use string interning for comparing string
         if(!strncmp(ident, "let", 3)) {
           token = new_token(LET, ident);
           break;

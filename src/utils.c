@@ -1,7 +1,8 @@
 #include "utils.h"
 
+// TODO: look for more better way to append two strings
 char* append(const char* dest, const char* source) {
-  char* result = NULL;
+  char* result = NULL; 
   asprintf(&result, "%s%s", dest, source);
   return result;
 }
