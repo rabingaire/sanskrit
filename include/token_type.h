@@ -2,12 +2,6 @@
 #define TOKENTYPE
 
 typedef enum {
-  ILLEGAL,
-  EOFF,
-
-  IDENT,
-  NUMBER,
-
   ASSIGN,
   PLUS,
 
@@ -20,10 +14,16 @@ typedef enum {
   LBRACE,
   RBRACE,
 
+  IDENT,
+  NUMBER,
+
   FUNCTION,
   LET,
   INT,
   RETURN,
+
+  ILLEGAL,
+  EOFF,
 } TokenType;
 
 #endif 

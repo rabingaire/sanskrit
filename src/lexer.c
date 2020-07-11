@@ -65,6 +65,14 @@ Token next_token(Lexer* lex) {
       token = new_token(PLUS, "+");
       break;
     }
+    case ',': {
+      token = new_token(COMMA, ",");
+      break;
+    }
+    case ':': {
+      token = new_token(COLON, ":");
+      break;
+    }
     case ';': {
       token = new_token(SEMICOLON, ";");
       break;
@@ -83,14 +91,6 @@ Token next_token(Lexer* lex) {
     }
     case '}': {
       token = new_token(RBRACE, "}");
-      break;
-    }
-    case ':': {
-      token = new_token(COLON, ":");
-      break;
-    }
-    case ',': {
-      token = new_token(COMMA, ",");
       break;
     }
     case 0: {
