@@ -8,11 +8,14 @@
 
 #include "utils.h"
 #include "token.h"
+#include "error_codes.h"
 
 typedef struct {
   char* input;
   size_t position;
   size_t read_position;
+  size_t line_number;
+  size_t column_number;
   char character;
 } Lexer;
 

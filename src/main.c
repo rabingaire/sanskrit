@@ -1,8 +1,17 @@
 #include "token.h"
 #include "lexer.h"
+#include "utils.h"
+#include "error_codes.h"
 
 int main(int argc, char** argv) {
-  char* input = "let a: int = (1 + 1); fn hello(a: int, b: int):int { return a + b };";
+  char* fileName = argv[1];
+
+  if (argc < 2 && fileName == NULL) {
+    printf("no sanskrit file listed\n");
+    exit(NO_SOURCE_FILE);
+  }
+
+  char* input = read_from_file(fileName);
 
   Lexer* lex = new_lexer(input);
 
@@ -13,4 +22,3 @@ int main(int argc, char** argv) {
 
   return 0;
 }
-

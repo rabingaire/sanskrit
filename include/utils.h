@@ -6,7 +6,10 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "error_codes.h"
+
 char* append(char*, char*);
+char* read_from_file(char*);
 
 #define MAX(x, y) ((x) >= (y) ? (x) : (y))
 

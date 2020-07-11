@@ -2,7 +2,7 @@ TARGET = app
 
 CC = clang
 INCLUDES = -I ./include
-CFLAGS = -Wall -Werror $(INCLUDES)
+CFLAGS = -Wall -Werror -std=c99 $(INCLUDES)
 
 HEADERS=$(shell find ./include -type f -name *.h)
 SOURCE=$(shell find ./src -type f -name *.c)
@@ -13,7 +13,6 @@ OBJS=$(SOURCE:.c=.o)
 
 run: $(OBJS) $(HEADERS)
 	@$(CC) -o $(TARGET) $(OBJS)
-	@./$(TARGET)
 
 clean:
 	@rm $(OBJS)

@@ -3,27 +3,27 @@
 Lexer* new_lexer(char* input) {
   Lexer* lex = (Lexer*)malloc(sizeof(Lexer));
   lex->input = input;
+  
   lex->position = 0;
   lex->read_position = 0;
+
+  lex->line_number = 1;
+  lex->column_number = 0;
+  
   lex->character = 0;
   return lex;
 }
 
 char read_character(Lexer* lex) {
-  if(lex->read_position >= strlen(lex->input)) {
-    lex->character = 0;
-  }
   lex->character = lex->input[lex->read_position];
   lex->position = lex->read_position;
   lex->read_position++;
+  lex->column_number++;
   return lex->character;
 }
 
 char peek_character(Lexer* lex) {
   size_t peek_position = lex->read_position;
-  if(peek_position >= strlen(lex->input)) {
-    return 0;
-  }
   return lex->input[peek_position];
 }
 
@@ -54,7 +54,11 @@ int read_number(Lexer* lex) {
 
 void skip_whitespace(Lexer* lex) {
 	while(lex->character == ' ' || lex->character == '\t' || lex->character == '\n' || lex->character == '\r') {
-		read_character(lex);
+		if (lex->character == '\n') {
+      lex->line_number++;
+      lex->column_number = 0;
+    }
+    read_character(lex);
 	}
 }
 
@@ -89,6 +93,9 @@ Token next_token(Lexer* lex) {
     case ',': {
       return new_token(COMMA, ",");
     }
+    case 0: {
+      return new_token(EOFF, "");
+    }
     default: {
       if(isalpha(lex->character)) {
         char* ident = read_ident(lex);
@@ -115,8 +122,13 @@ Token next_token(Lexer* lex) {
         return new_token(NUMBER, literal);
       }
       
-      printf("<INVALID> char %c, at %zu\n", lex->character, lex->position);
-      exit(1);
+      printf(
+        "<INVALID> char '%c', at line: %zu, column: %zu, position: %zu\n",
+        lex->character, lex->line_number,
+        lex->column_number,
+        lex->position + 1
+      );
+      exit(INVALID_CHARACTER);
     }
   }
 }

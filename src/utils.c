@@ -19,3 +19,35 @@ void *buf__grow(const void *buf, size_t new_len, size_t elem_size) {
   new_hdr->cap = new_cap;
   return new_hdr->buf;
 }
+
+
+// TODO: rewrite this with better error handling
+char* read_from_file(char* file_path) {
+  FILE* f = fopen(file_path, "r");
+  if(f == NULL) {
+    printf("Can't read file: %s\n", file_path);
+    exit(FILE_READ);
+  }
+
+  if(fseek(f, 0, SEEK_END) != 0) {
+    printf("Can't read file: %s\n", file_path);
+    exit(FILE_READ);
+  };
+
+  long fsize = ftell(f);
+  rewind(f);
+
+  char* string = malloc(fsize + 1);
+  fread(string, 1, fsize, f);
+  if(ferror(f) != 0) {
+    printf("Can't read file: %s\n", file_path);
+    exit(FILE_READ);
+  }
+
+  if(fclose(f) != 0) {
+    printf("Can't close file: %s\n", file_path);
+    exit(FILE_CLOSE);
+  };
+
+  return string;
+}
