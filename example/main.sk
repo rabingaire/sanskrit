@@ -3,7 +3,19 @@ fn add(a: int, b: int): int {
 }
 
 fn main(): void {
- let a: int = 10;
- let b = 20;
- add(a, b);
+  let a: int = 10;
+  b := 20;
+  add(a, b);
+
+  for {
+
+  }
+
+  if true {
+
+  } else if a >= 10 {
+
+  } else {
+   
+  }
 }

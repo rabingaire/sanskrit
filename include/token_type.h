@@ -3,11 +3,24 @@
 
 typedef enum {
   ASSIGN,
+  EQUAL,
+  NOT_EQUAL,
+
   PLUS,
+  MINUS,
+  EXCLAMATION,
+  ASTERISK,
+  SLASH,
+  INCREMENT,
+  DECREMENT,
 
   COMMA,
   SEMICOLON,
   COLON,
+  LESS_THEN,
+  LESS_THEN_EQUAL,
+  GREATER_THEN,
+  GREATER_THEN_EQUAL,
 
   LPAREN,
   RPAREN,
@@ -22,6 +35,11 @@ typedef enum {
   INT,
   RETURN,
   VOID,
+  FOR,
+  BOOL,
+  IF,
+  ELSE,
+  RANGE,
 
   ILLEGAL,
   EOFF,

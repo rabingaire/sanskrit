@@ -58,23 +58,82 @@ Token next_token(Lexer* lex) {
 
   switch(lex->character) {
     case '=': {
-      token = new_token(ASSIGN, "=");
+      if(peek_character(lex) == '=') {
+        token = new_token(EQUAL, "==");
+        read_character(lex);
+      } else {
+        token = new_token(ASSIGN, "=");
+      }
       break;
     }
     case '+': {
-      token = new_token(PLUS, "+");
+      if(peek_character(lex) == '+') {
+        token = new_token(INCREMENT, "++");
+        read_character(lex);
+      } else {
+        token = new_token(PLUS, "+");
+      }
+      break;
+    }
+    case '-': {
+      if(peek_character(lex) == '-') {
+        token = new_token(DECREMENT, "--");
+        read_character(lex);
+      } else {
+        token = new_token(MINUS, "-");
+      }
+      break;
+    }
+    case '!': {
+      if(peek_character(lex) == '=') {
+        token = new_token(NOT_EQUAL, "!=");
+        read_character(lex);
+      } else {
+        token = new_token(EXCLAMATION, "!");
+      }
+      break;
+    }
+    case '*': {
+      token = new_token(ASTERISK, "*");
+      break;
+    }
+    case '/': {
+      token = new_token(SLASH, "/");
       break;
     }
     case ',': {
       token = new_token(COMMA, ",");
       break;
     }
-    case ':': {
-      token = new_token(COLON, ":");
-      break;
-    }
     case ';': {
       token = new_token(SEMICOLON, ";");
+      break;
+    }
+    case ':': {
+      if(peek_character(lex) == '=') {
+        token = new_token(ASSIGN, ":=");
+        read_character(lex);
+      } else {
+        token = new_token(COLON, ":");
+      }
+      break;
+    }
+    case '<': {
+      if(peek_character(lex) == '=') {
+        token = new_token(LESS_THEN_EQUAL, "<=");
+        read_character(lex);
+      } else {
+        token = new_token(LESS_THEN, "<");
+      }
+      break;
+    }
+    case '>': {
+       if(peek_character(lex) == '=') {
+        token = new_token(GREATER_THEN_EQUAL, ">=");
+        read_character(lex);
+      } else {
+        token = new_token(GREATER_THEN, ">");
+      }
       break;
     }
     case '(': {
@@ -119,6 +178,36 @@ Token next_token(Lexer* lex) {
 
         if(!strncmp(ident, "void", 4)) {
           token = new_token(VOID, ident);
+          break;
+        }
+
+        if(!strncmp(ident, "for", 3)) {
+          token = new_token(FOR, ident);
+          break;
+        }
+
+        if(!strncmp(ident, "true", 4)) {
+          token = new_token(BOOL, ident);
+          break;
+        }
+
+        if(!strncmp(ident, "false", 4)) {
+          token = new_token(BOOL, ident);
+          break;
+        }
+
+        if(!strncmp(ident, "if", 2)) {
+          token = new_token(IF, ident);
+          break;
+        }
+
+        if(!strncmp(ident, "else", 4)) {
+          token = new_token(ELSE, ident);
+          break;
+        }
+
+        if(!strncmp(ident, "range", 5)) {
+          token = new_token(RANGE, ident);
           break;
         }
 
