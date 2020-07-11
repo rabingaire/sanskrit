@@ -4,6 +4,11 @@ Sanskrit is a low level general purpose programming language
 
 _Note: This programming language is in development phase, trying to write parser right now_
 
+# Language Pipeline (for now)
+
+Source Code -> Lexer -> Parser(recursive descent) -> LLVM -> Executable
+.sk file -> Tokens -> AST -> .o file -> executable
+
 # Language Syntax
 
 Variable Declaration
