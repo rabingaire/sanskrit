@@ -11,7 +11,7 @@ Source Code -> Lexer -> Parser(recursive descent) -> LLVM -> Executable
 
 # Parser implementation
 
-Parser will be handwritten recursive descent parser, although for better understanding of parser rules I will write and add EBNB grammers rules.
+Parser will be handwritten recursive descent parser, although for better understanding of parser rules I will write and add EBNF grammers rules.
 
 # Language Syntax
 
