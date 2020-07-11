@@ -7,6 +7,7 @@ _Note: This programming language is in development phase, trying to write parser
 # Language Pipeline (for now)
 
 Source Code -> Lexer -> Parser(recursive descent) -> LLVM -> Executable
+
 .sk file -> Tokens -> AST -> .o file -> executable
 
 # Parser implementation
