@@ -5,7 +5,7 @@ fn add(a: int, b: int): int {
 fn main(): void {
   let a: int = 10;
   b := 20;
-  add(a, b);
+  add(a, b); // Hello world
 
   for {
 
@@ -18,4 +18,6 @@ fn main(): void {
   } else {
    
   }
+
+  let c: str = "hello world";
 }

@@ -22,27 +22,40 @@ char peek_character(Lexer* lex) {
 }
 
 char* read_ident(Lexer* lex) {
-  char* ident = "";
+  char* literal = "";
   while(true) {
-    ident = append(ident, &lex->character);
+    literal = append(literal, &lex->character);
     if(!isalpha(peek_character(lex))) {
       break;
     }
     read_character(lex);
   }
-  return ident;
+  return literal;
 }
 
 char* read_number(Lexer* lex) {
-  char* ident = "";
+  char* literal = "";
   while(true) {
-    ident = append(ident, &lex->character);
+    literal = append(literal, &lex->character);
     if(!isdigit(peek_character(lex))) {
       break;
     }
     read_character(lex);
   }
-  return ident;
+  return literal;
+}
+
+char* read_string(Lexer* lex) {
+  char* literal = "";
+  while(true) {
+    read_character(lex);
+    literal = append(literal, &lex->character);
+    if(!peek_character(lex) || peek_character(lex) == '"') {
+      read_character(lex);
+      break;
+    }
+  }
+  return literal;
 }
 
 void skip_whitespace(Lexer* lex) {
@@ -172,66 +185,76 @@ Token next_token(Lexer* lex) {
       token = new_token(RBRACE, "}");
       break;
     }
+    case '"': {
+      char* literal = read_string(lex);
+      token = new_token(STRING, literal);
+      break;
+    }
     case 0: {
       token = new_token(EOFF, "EOF");
       break;
     }
     default: {
       if(isalpha(lex->character)) {
-        char* ident = read_ident(lex);
+        char* literal = read_ident(lex);
 
         // TODO: use string interning for comparing string
-        if(!strncmp(ident, "let", 3)) {
-          token = new_token(LET, ident);
+        if(!strncmp(literal, "let", 3)) {
+          token = new_token(LET, literal);
           break;
         }
 
-        if(!strncmp(ident, "int", 3)) {
-          token = new_token(INT, ident);
+        if(!strncmp(literal, "int", 3)) {
+          token = new_token(INT, literal);
           break;
         }
 
-        if(!strncmp(ident, "return", 6)) {
-          token = new_token(RETURN, ident);
+        if(!strncmp(literal, "return", 6)) {
+          token = new_token(RETURN, literal);
           break;
         }
 
-        if(!strncmp(ident, "void", 4)) {
-          token = new_token(VOID, ident);
+        if(!strncmp(literal, "void", 4)) {
+          token = new_token(VOID, literal);
           break;
         }
 
-        if(!strncmp(ident, "for", 3)) {
-          token = new_token(FOR, ident);
+        if(!strncmp(literal, "for", 3)) {
+          token = new_token(FOR, literal);
           break;
         }
 
-        if(!strncmp(ident, "true", 4)) {
-          token = new_token(BOOL, ident);
+        if(!strncmp(literal, "true", 4)) {
+          token = new_token(BOOL, literal);
           break;
         }
 
-        if(!strncmp(ident, "false", 4)) {
-          token = new_token(BOOL, ident);
+        if(!strncmp(literal, "false", 4)) {
+          token = new_token(BOOL, literal);
           break;
         }
 
-        if(!strncmp(ident, "if", 2)) {
-          token = new_token(IF, ident);
+        if(!strncmp(literal, "if", 2)) {
+          token = new_token(IF, literal);
           break;
         }
 
-        if(!strncmp(ident, "else", 4)) {
-          token = new_token(ELSE, ident);
+        if(!strncmp(literal, "else", 4)) {
+          token = new_token(ELSE, literal);
           break;
         }
 
-        if(!strncmp(ident, "range", 5)) {
-          token = new_token(RANGE, ident);
+        if(!strncmp(literal, "range", 5)) {
+          token = new_token(RANGE, literal);
           break;
         }
 
-        token = new_token(IDENT, ident);
+        if(!strncmp(literal, "str", 3)) {
+          token = new_token(STR, literal);
+          break;
+        }
+
+        token = new_token(IDENT, literal);
         break;
       }
       

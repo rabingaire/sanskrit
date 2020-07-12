@@ -31,6 +31,7 @@ typedef enum {
 
   IDENT,
   NUMBER,
+  STRING,
 
   FUNCTION,
   LET,
@@ -42,6 +43,7 @@ typedef enum {
   IF,
   ELSE,
   RANGE,
+  STR,
 
   ILLEGAL,
   EOFF,
