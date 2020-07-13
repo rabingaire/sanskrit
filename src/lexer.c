@@ -71,67 +71,119 @@ Token next_token(Lexer* lex) {
 
   switch(lex->character) {
     case '=': {
-      if(peek_character(lex) == '=') {
-        token = new_token(EQUAL, "==");
-        read_character(lex);
-      } else {
-        token = new_token(ASSIGN, "=");
+      switch(peek_character(lex)) {
+        case '=': {
+          token = new_token(EQUAL, "==");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(ASSIGN, "=");
+        }
       }
       break;
     }
     case '&': {
-      if(peek_character(lex) == '&') {
-        token = new_token(AND, "&&");
-        read_character(lex);
-      } else {
-        // Single & character is illegal for now
-        token = new_token(ILLEGAL, append("", &lex->character));
+      switch(peek_character(lex)) {
+        case '&': {
+          token = new_token(AND, "&&");
+          read_character(lex);
+          break;
+        }
+        default: {
+          // Single & character is illegal for now
+          token = new_token(ILLEGAL, append("", &lex->character));
+        }
       }
       break;
     }
     case '|': {
-      if(peek_character(lex) == '|') {
-        token = new_token(OR, "||");
-        read_character(lex);
-      } else {
-        // Single & character is illegal for now
-        token = new_token(ILLEGAL, append("", &lex->character));
+      switch(peek_character(lex)) {
+        case '|': {
+          token = new_token(OR, "||");
+          read_character(lex);
+          break;
+        }
+        default: {
+          // Single | character is illegal for now
+          token = new_token(ILLEGAL, append("", &lex->character));
+        }
       }
       break;
     }
     case '+': {
-      if(peek_character(lex) == '+') {
-        token = new_token(INCREMENT, "++");
-        read_character(lex);
-      } else {
-        token = new_token(PLUS, "+");
+      switch(peek_character(lex)) {
+        case '+': {
+          token = new_token(INCREMENT, "++");
+          read_character(lex);
+          break;
+        }
+        case '=': {
+          token = new_token(PLUS_ASSIGN, "+=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(PLUS, "+");
+        }
       }
       break;
     }
     case '-': {
-      if(peek_character(lex) == '-') {
-        token = new_token(DECREMENT, "--");
-        read_character(lex);
-      } else {
-        token = new_token(MINUS, "-");
+      switch(peek_character(lex)) {
+        case '-': {
+          token = new_token(DECREMENT, "--");
+          read_character(lex);
+          break;
+        }
+        case '=': {
+          token = new_token(MINUS_ASSIGN, "-=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(MINUS, "-");
+        }
       }
       break;
     }
     case '!': {
-      if(peek_character(lex) == '=') {
-        token = new_token(NOT_EQUAL, "!=");
-        read_character(lex);
-      } else {
-        token = new_token(EXCLAMATION, "!");
+      switch(peek_character(lex)) {
+        case '=': {
+          token = new_token(NOT_EQUAL, "!=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(EXCLAMATION, "!");
+        }
       }
       break;
     }
     case '*': {
-      token = new_token(ASTERISK, "*");
+      switch(peek_character(lex)) {
+        case '=': {
+          token = new_token(ASTERISK_ASSIGN, "*=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(ASTERISK, "*");
+        }
+      }
       break;
     }
     case '/': {
-      token = new_token(SLASH, "/");
+      switch(peek_character(lex)) {
+        case '=': {
+          token = new_token(SLASH_ASSIGN, "/=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(SLASH, "/");
+        }
+      }
       break;
     }
     case ',': {
@@ -143,29 +195,41 @@ Token next_token(Lexer* lex) {
       break;
     }
     case ':': {
-      if(peek_character(lex) == '=') {
-        token = new_token(ASSIGN, ":=");
-        read_character(lex);
-      } else {
-        token = new_token(COLON, ":");
+      switch(peek_character(lex)) {
+        case '=': {
+          token = new_token(COLON_ASSIGN, ":=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(COLON, ":");
+        }
       }
       break;
     }
     case '<': {
-      if(peek_character(lex) == '=') {
-        token = new_token(LESS_THEN_EQUAL, "<=");
-        read_character(lex);
-      } else {
-        token = new_token(LESS_THEN, "<");
+      switch(peek_character(lex)) {
+        case '=': {
+          token = new_token(LESS_THEN_EQUAL, "<=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(LESS_THEN, "<");
+        }
       }
       break;
     }
     case '>': {
-       if(peek_character(lex) == '=') {
-        token = new_token(GREATER_THEN_EQUAL, ">=");
-        read_character(lex);
-      } else {
-        token = new_token(GREATER_THEN, ">");
+      switch(peek_character(lex)) {
+        case '=': {
+          token = new_token(GREATER_THEN_EQUAL, ">=");
+          read_character(lex);
+          break;
+        }
+        default: {
+          token = new_token(GREATER_THEN, ">");
+        }
       }
       break;
     }
