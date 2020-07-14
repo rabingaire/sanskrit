@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "utils.h"
 #include "token.h"
@@ -25,7 +26,7 @@ char peek_character(Lexer*);
 
 char* read_ident(Lexer*);
 
-char* read_number(Lexer*);
+int64_t read_integer(Lexer*);
 
 void skip_whitespace(Lexer*);
 

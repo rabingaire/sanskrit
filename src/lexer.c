@@ -33,10 +33,11 @@ char* read_ident(Lexer* lex) {
   return literal;
 }
 
-char* read_number(Lexer* lex) {
-  char* literal = "";
+int64_t read_integer(Lexer* lex) {
+  int64_t literal = 0;
   while(true) {
-    literal = append(literal, &lex->character);
+    literal *= 10;
+    literal += lex->character - '0';
     if(!isdigit(peek_character(lex))) {
       break;
     }
@@ -251,7 +252,7 @@ Token next_token(Lexer* lex) {
     }
     case '"': {
       char* literal = read_string(lex);
-      token = new_token(STRING, literal);
+      token = string_token(STRING, literal);
       break;
     }
     case 0: {
@@ -323,8 +324,8 @@ Token next_token(Lexer* lex) {
       }
       
       if(isdigit(lex->character)) {
-        char* integer = read_number(lex);
-        token = new_token(NUMBER, integer);
+        int64_t integer = read_integer(lex);
+        token = integer_token(NUMBER, integer);
         break;
       }
 
