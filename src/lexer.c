@@ -1,6 +1,6 @@
 #include "lexer.h"
 
-static inline char read_character(Lexer*);
+static inline char read_next_character(Lexer*);
 static inline char peek_character(Lexer*);
 static char* read_ident(Lexer*);
 static int64_t read_integer(Lexer*);
@@ -16,7 +16,7 @@ Lexer* new_lexer(char* input) {
   return lex;
 }
 
-static inline char read_character(Lexer* lex) {
+static inline char read_next_character(Lexer* lex) {
   lex->position = lex->read_position;
   lex->read_position++;
   lex->character = lex->input[lex->position];
@@ -35,7 +35,7 @@ static char* read_ident(Lexer* lex) {
     if(!isalpha(peek_character(lex))) {
       break;
     }
-    read_character(lex);
+    read_next_character(lex);
   }
   return literal;
 }
@@ -48,7 +48,7 @@ static int64_t read_integer(Lexer* lex) {
     if(!isdigit(peek_character(lex))) {
       break;
     }
-    read_character(lex);
+    read_next_character(lex);
   }
   return literal;
 }
@@ -56,10 +56,10 @@ static int64_t read_integer(Lexer* lex) {
 static char* read_string(Lexer* lex) {
   char* literal = "";
   while(true) {
-    read_character(lex);
+    read_next_character(lex);
     literal = append(literal, &lex->character);
     if(!peek_character(lex) || peek_character(lex) == '"') {
-      read_character(lex);
+      read_next_character(lex);
       break;
     }
   }
@@ -68,7 +68,7 @@ static char* read_string(Lexer* lex) {
 
 static void skip_whitespace(Lexer* lex) {
 	while(lex->character == ' ' || lex->character == '\t' || lex->character == '\n' || lex->character == '\r') {
-    read_character(lex);
+    read_next_character(lex);
 	}
 }
 
@@ -82,7 +82,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '=': {
           token = new_token(EQUAL, "==");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -95,7 +95,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '&': {
           token = new_token(AND, "&&");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -109,7 +109,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '|': {
           token = new_token(OR, "||");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -123,12 +123,12 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '+': {
           token = new_token(INCREMENT, "++");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         case '=': {
           token = new_token(PLUS_ASSIGN, "+=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -141,12 +141,12 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '-': {
           token = new_token(DECREMENT, "--");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         case '=': {
           token = new_token(MINUS_ASSIGN, "-=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -159,7 +159,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '=': {
           token = new_token(NOT_EQUAL, "!=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -172,7 +172,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '=': {
           token = new_token(ASTERISK_ASSIGN, "*=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -185,7 +185,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '=': {
           token = new_token(SLASH_ASSIGN, "/=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -206,7 +206,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '=': {
           token = new_token(COLON_ASSIGN, ":=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -219,7 +219,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '=': {
           token = new_token(LESS_THEN_EQUAL, "<=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -232,7 +232,7 @@ Token next_token(Lexer* lex) {
       switch(peek_character(lex)) {
         case '=': {
           token = new_token(GREATER_THEN_EQUAL, ">=");
-          read_character(lex);
+          read_next_character(lex);
           break;
         }
         default: {
@@ -340,6 +340,6 @@ Token next_token(Lexer* lex) {
       break;
     }
   }
-  read_character(lex);
+  read_next_character(lex);
   return token;
 }
