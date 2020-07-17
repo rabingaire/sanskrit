@@ -1,4 +1,4 @@
-TARGET = app
+TARGET = sk
 
 CC = clang
 INCLUDES = -I ./include
