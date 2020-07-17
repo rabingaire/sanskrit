@@ -20,16 +20,6 @@ typedef struct {
 
 Lexer* new_lexer(char*);
 
-char read_character(Lexer*);
-
-char peek_character(Lexer*);
-
-char* read_ident(Lexer*);
-
-int64_t read_integer(Lexer*);
-
-void skip_whitespace(Lexer*);
-
 Token next_token(Lexer*);
 
 #endif

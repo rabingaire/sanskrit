@@ -1,5 +1,12 @@
 #include "lexer.h"
 
+static char read_character(Lexer*);
+static char peek_character(Lexer*);
+static char* read_ident(Lexer*);
+static int64_t read_integer(Lexer*);
+static char* read_string(Lexer*);
+static void skip_whitespace(Lexer*);
+
 Lexer* new_lexer(char* input) {
   Lexer* lex = (Lexer*)malloc(sizeof(Lexer));
   lex->input = input;
@@ -9,19 +16,19 @@ Lexer* new_lexer(char* input) {
   return lex;
 }
 
-char read_character(Lexer* lex) {
+static char read_character(Lexer* lex) {
   lex->position = lex->read_position;
   lex->read_position++;
   lex->character = lex->input[lex->position];
   return lex->character;
 }
 
-char peek_character(Lexer* lex) {
+static char peek_character(Lexer* lex) {
   size_t peek_position = lex->read_position;
   return lex->input[peek_position];
 }
 
-char* read_ident(Lexer* lex) {
+static char* read_ident(Lexer* lex) {
   char* literal = "";
   while(true) {
     literal = append(literal, &lex->character);
@@ -33,7 +40,7 @@ char* read_ident(Lexer* lex) {
   return literal;
 }
 
-int64_t read_integer(Lexer* lex) {
+static int64_t read_integer(Lexer* lex) {
   int64_t literal = 0;
   while(true) {
     literal *= 10;
@@ -46,7 +53,7 @@ int64_t read_integer(Lexer* lex) {
   return literal;
 }
 
-char* read_string(Lexer* lex) {
+static char* read_string(Lexer* lex) {
   char* literal = "";
   while(true) {
     read_character(lex);
@@ -59,7 +66,7 @@ char* read_string(Lexer* lex) {
   return literal;
 }
 
-void skip_whitespace(Lexer* lex) {
+static void skip_whitespace(Lexer* lex) {
 	while(lex->character == ' ' || lex->character == '\t' || lex->character == '\n' || lex->character == '\r') {
     read_character(lex);
 	}
