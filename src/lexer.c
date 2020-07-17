@@ -325,7 +325,7 @@ Token next_token(Lexer* lex) {
       
       if(isdigit(lex->character)) {
         int64_t integer = read_integer(lex);
-        token = integer_token(NUMBER, integer);
+        token = integer_token(INTEGER, integer);
         break;
       }
 

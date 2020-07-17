@@ -41,3 +41,20 @@ void fatalf(const int exit_code, const char* fmt, ...) {
   exit(exit_code);
   va_end(args);
 }
+
+void printToken(Token token) {
+  switch(token.type) {
+    case INTEGER: {
+      printf("Token type: %u \t Token literal: %lld\n", token.type, token.integer_value);
+      break;
+    }
+    case STRING: {
+      printf("Token type: %u \t Token literal: %s\n", token.type, token.string_value);
+      break;
+    }
+    default: {
+      printf("Token type: %u \t Token literal: %s\n", token.type, token.token_value);
+      break;
+    }
+  }
+}

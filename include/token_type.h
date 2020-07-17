@@ -35,7 +35,7 @@ typedef enum {
   RBRACE,
 
   IDENT,
-  NUMBER,
+  INTEGER,
   STRING,
 
   FUNCTION,
