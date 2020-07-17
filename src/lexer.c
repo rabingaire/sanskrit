@@ -1,7 +1,7 @@
 #include "lexer.h"
 
-static char read_character(Lexer*);
-static char peek_character(Lexer*);
+static inline char read_character(Lexer*);
+static inline char peek_character(Lexer*);
 static char* read_ident(Lexer*);
 static int64_t read_integer(Lexer*);
 static char* read_string(Lexer*);
@@ -16,14 +16,14 @@ Lexer* new_lexer(char* input) {
   return lex;
 }
 
-static char read_character(Lexer* lex) {
+static inline char read_character(Lexer* lex) {
   lex->position = lex->read_position;
   lex->read_position++;
   lex->character = lex->input[lex->position];
   return lex->character;
 }
 
-static char peek_character(Lexer* lex) {
+static inline char peek_character(Lexer* lex) {
   size_t peek_position = lex->read_position;
   return lex->input[peek_position];
 }
