@@ -24,11 +24,11 @@ void *buf__grow(const void *buf, int new_len, int elem_size)
   int *new_buf;
   if (buf)
   {
-    new_buf = realloc(buf__raw(buf), new_size);
+    new_buf = (int *)realloc(buf__raw(buf), new_size);
   }
   else
   {
-    new_buf = malloc(new_size);
+    new_buf = (int *)malloc(new_size);
     new_buf[0] = 0;
   }
   new_buf[1] = new_cap;
