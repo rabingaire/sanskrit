@@ -53,12 +53,12 @@ void printToken(token_T token)
 {
   switch (token.type)
   {
-  case INTEGER:
+  case TOKEN_INTEGER:
   {
     printf("Token type: %u \t Token literal: %lld\n", token.type, token.integer_value);
     break;
   }
-  case STRING:
+  case TOKEN_STRING:
   {
     printf("Token type: %u \t Token literal: %s\n", token.type, token.string_value);
     break;

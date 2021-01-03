@@ -100,13 +100,13 @@ token_T next_token(lexer_T *lex)
     {
     case '=':
     {
-      token = new_token(EQUAL, "==");
+      token = new_token(TOKEN_EQUAL, "==");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(ASSIGN, "=");
+      token = new_token(TOKEN_ASSIGN, "=");
     }
     }
     break;
@@ -117,14 +117,14 @@ token_T next_token(lexer_T *lex)
     {
     case '&':
     {
-      token = new_token(AND, "&&");
+      token = new_token(TOKEN_AND, "&&");
       read_next_character(lex);
       break;
     }
     default:
     {
       // Single & character is illegal for now
-      token = new_token(ILLEGAL, append("", &lex->character));
+      token = new_token(TOKEN_ILLEGAL, append("", &lex->character));
     }
     }
     break;
@@ -135,14 +135,14 @@ token_T next_token(lexer_T *lex)
     {
     case '|':
     {
-      token = new_token(OR, "||");
+      token = new_token(TOKEN_OR, "||");
       read_next_character(lex);
       break;
     }
     default:
     {
       // Single | character is illegal for now
-      token = new_token(ILLEGAL, append("", &lex->character));
+      token = new_token(TOKEN_ILLEGAL, append("", &lex->character));
     }
     }
     break;
@@ -153,19 +153,19 @@ token_T next_token(lexer_T *lex)
     {
     case '+':
     {
-      token = new_token(INCREMENT, "++");
+      token = new_token(TOKEN_INCREMENT, "++");
       read_next_character(lex);
       break;
     }
     case '=':
     {
-      token = new_token(PLUS_ASSIGN, "+=");
+      token = new_token(TOKEN_PLUS_ASSIGN, "+=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(PLUS, "+");
+      token = new_token(TOKEN_PLUS, "+");
     }
     }
     break;
@@ -176,19 +176,19 @@ token_T next_token(lexer_T *lex)
     {
     case '-':
     {
-      token = new_token(DECREMENT, "--");
+      token = new_token(TOKEN_DECREMENT, "--");
       read_next_character(lex);
       break;
     }
     case '=':
     {
-      token = new_token(MINUS_ASSIGN, "-=");
+      token = new_token(TOKEN_MINUS_ASSIGN, "-=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(MINUS, "-");
+      token = new_token(TOKEN_MINUS, "-");
     }
     }
     break;
@@ -199,13 +199,13 @@ token_T next_token(lexer_T *lex)
     {
     case '=':
     {
-      token = new_token(NOT_EQUAL, "!=");
+      token = new_token(TOKEN_NOT_EQUAL, "!=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(EXCLAMATION, "!");
+      token = new_token(TOKEN_EXCLAMATION, "!");
     }
     }
     break;
@@ -216,13 +216,13 @@ token_T next_token(lexer_T *lex)
     {
     case '=':
     {
-      token = new_token(ASTERISK_ASSIGN, "*=");
+      token = new_token(TOKEN_ASTERISK_ASSIGN, "*=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(ASTERISK, "*");
+      token = new_token(TOKEN_ASTERISK, "*");
     }
     }
     break;
@@ -233,25 +233,25 @@ token_T next_token(lexer_T *lex)
     {
     case '=':
     {
-      token = new_token(SLASH_ASSIGN, "/=");
+      token = new_token(TOKEN_SLASH_ASSIGN, "/=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(SLASH, "/");
+      token = new_token(TOKEN_SLASH, "/");
     }
     }
     break;
   }
   case ',':
   {
-    token = new_token(COMMA, ",");
+    token = new_token(TOKEN_COMMA, ",");
     break;
   }
   case ';':
   {
-    token = new_token(SEMICOLON, ";");
+    token = new_token(TOKEN_SEMICOLON, ";");
     break;
   }
   case ':':
@@ -260,13 +260,13 @@ token_T next_token(lexer_T *lex)
     {
     case '=':
     {
-      token = new_token(COLON_ASSIGN, ":=");
+      token = new_token(TOKEN_COLON_ASSIGN, ":=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(COLON, ":");
+      token = new_token(TOKEN_COLON, ":");
     }
     }
     break;
@@ -277,13 +277,13 @@ token_T next_token(lexer_T *lex)
     {
     case '=':
     {
-      token = new_token(LESS_THEN_EQUAL, "<=");
+      token = new_token(TOKEN_LESS_THEN_EQUAL, "<=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(LESS_THEN, "<");
+      token = new_token(TOKEN_LESS_THEN, "<");
     }
     }
     break;
@@ -294,46 +294,46 @@ token_T next_token(lexer_T *lex)
     {
     case '=':
     {
-      token = new_token(GREATER_THEN_EQUAL, ">=");
+      token = new_token(TOKEN_GREATER_THEN_EQUAL, ">=");
       read_next_character(lex);
       break;
     }
     default:
     {
-      token = new_token(GREATER_THEN, ">");
+      token = new_token(TOKEN_GREATER_THEN, ">");
     }
     }
     break;
   }
   case '(':
   {
-    token = new_token(LPAREN, "(");
+    token = new_token(TOKEN_LPAREN, "(");
     break;
   }
   case ')':
   {
-    token = new_token(RPAREN, ")");
+    token = new_token(TOKEN_RPAREN, ")");
     break;
   }
   case '{':
   {
-    token = new_token(LBRACE, "{");
+    token = new_token(TOKEN_LBRACE, "{");
     break;
   }
   case '}':
   {
-    token = new_token(RBRACE, "}");
+    token = new_token(TOKEN_RBRACE, "}");
     break;
   }
   case '"':
   {
     char *literal = read_string(lex);
-    token = string_token(STRING, literal);
+    token = string_token(TOKEN_STRING, literal);
     break;
   }
   case 0:
   {
-    token = new_token(EOFF, "EOF");
+    token = new_token(TOKEN_EOF, "EOF");
     break;
   }
   default:
@@ -345,82 +345,82 @@ token_T next_token(lexer_T *lex)
       // TODO: use string interning for comparing string
       if (!strncmp(literal, "let", 3))
       {
-        token = new_token(LET, literal);
+        token = new_token(TOKEN_LET, literal);
         break;
       }
 
       if (!strncmp(literal, "int", 3))
       {
-        token = new_token(INT, literal);
+        token = new_token(TOKEN_INT, literal);
         break;
       }
 
       if (!strncmp(literal, "return", 6))
       {
-        token = new_token(RETURN, literal);
+        token = new_token(TOKEN_RETURN, literal);
         break;
       }
 
       if (!strncmp(literal, "void", 4))
       {
-        token = new_token(VOID, literal);
+        token = new_token(TOKEN_VOID, literal);
         break;
       }
 
       if (!strncmp(literal, "for", 3))
       {
-        token = new_token(FOR, literal);
+        token = new_token(TOKEN_FOR, literal);
         break;
       }
 
       if (!strncmp(literal, "true", 4))
       {
-        token = new_token(BOOL, literal);
+        token = new_token(TOKEN_BOOL, literal);
         break;
       }
 
       if (!strncmp(literal, "false", 4))
       {
-        token = new_token(BOOL, literal);
+        token = new_token(TOKEN_BOOL, literal);
         break;
       }
 
       if (!strncmp(literal, "if", 2))
       {
-        token = new_token(IF, literal);
+        token = new_token(TOKEN_IF, literal);
         break;
       }
 
       if (!strncmp(literal, "else", 4))
       {
-        token = new_token(ELSE, literal);
+        token = new_token(TOKEN_ELSE, literal);
         break;
       }
 
       if (!strncmp(literal, "range", 5))
       {
-        token = new_token(RANGE, literal);
+        token = new_token(TOKEN_RANGE, literal);
         break;
       }
 
       if (!strncmp(literal, "str", 3))
       {
-        token = new_token(STR, literal);
+        token = new_token(TOKEN_STR, literal);
         break;
       }
 
-      token = new_token(IDENT, literal);
+      token = new_token(TOKEN_IDENT, literal);
       break;
     }
 
     if (isdigit(lex->character))
     {
       int64_t integer = read_integer(lex);
-      token = integer_token(INTEGER, integer);
+      token = integer_token(TOKEN_INTEGER, integer);
       break;
     }
 
-    token = new_token(ILLEGAL, append("", &lex->character));
+    token = new_token(TOKEN_ILLEGAL, append("", &lex->character));
     break;
   }
   }

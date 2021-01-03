@@ -19,7 +19,7 @@ int main(int argc, char **argv)
   {
     token_T token = next_token(lex);
     printToken(token);
-    if (token.type == EOFF)
+    if (token.type == TOKEN_EOF)
     {
       break;
     }
