@@ -1,6 +1,5 @@
 #include "utils.h"
 
-// TODO: look for more better way to append two strings
 char *append(const char *dest, const char *source)
 {
   char *result = NULL;
@@ -8,7 +7,6 @@ char *append(const char *dest, const char *source)
   return result;
 }
 
-// TODO: rewrite this with better error handling
 char *read_from_file(const char *file_path)
 {
   FILE *f = fopen(file_path, "r");
