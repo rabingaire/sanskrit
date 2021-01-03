@@ -1,7 +1,8 @@
-#ifndef TOKENTYPE
-#define TOKENTYPE
+#ifndef SK_TOKEN_TYPE_H
+#define SK_TOKEN_TYPE_H
 
-typedef enum {
+typedef enum
+{
   ASSIGN,
   COLON_ASSIGN,
   EQUAL,
@@ -54,4 +55,4 @@ typedef enum {
   EOFF,
 } TokenType;
 
-#endif 
+#endif

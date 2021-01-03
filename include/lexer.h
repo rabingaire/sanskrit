@@ -1,5 +1,5 @@
-#ifndef LEXER
-#define LEXER
+#ifndef SK_LEXER_H
+#define SK_LEXER_H
 
 #include <stdlib.h>
 #include <ctype.h>
@@ -11,15 +11,16 @@
 #include "token.h"
 #include "error_codes.h"
 
-typedef struct {
-  char* input;
+typedef struct
+{
+  char *input;
   size_t position;
   size_t read_position;
   char character;
 } Lexer;
 
-Lexer* new_lexer(char*);
+Lexer *new_lexer(char *);
 
-Token next_token(Lexer*);
+Token next_token(Lexer *);
 
 #endif
