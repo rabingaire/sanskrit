@@ -9,7 +9,7 @@ fn main(): void {
   b -= 10;
   b *= 2;
   b /= 5;
-  add(a, b); // Hello world
+  add(a, b); // This is an example of comment
 
   for {
 
