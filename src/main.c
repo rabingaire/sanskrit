@@ -13,11 +13,11 @@ int main(int argc, char **argv)
 
   char *input = read_from_file(fileName);
 
-  Lexer *lex = new_lexer(input);
+  lexer_T *lex = new_lexer(input);
 
   while (true)
   {
-    Token token = next_token(lex);
+    token_T token = next_token(lex);
     printToken(token);
     if (token.type == EOFF)
     {

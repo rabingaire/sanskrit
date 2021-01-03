@@ -9,6 +9,6 @@ typedef enum
   FILE_CLOSE,
 
   INVALID_CHARACTER
-} ErrorCode;
+} error_code_T;
 
 #endif

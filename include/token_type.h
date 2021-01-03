@@ -53,6 +53,6 @@ typedef enum
 
   ILLEGAL,
   EOFF,
-} TokenType;
+} token_type_T;
 
 #endif

@@ -17,10 +17,10 @@ typedef struct
   size_t position;
   size_t read_position;
   char character;
-} Lexer;
+} lexer_T;
 
-Lexer *new_lexer(char *);
+lexer_T *new_lexer(char *);
 
-Token next_token(Lexer *);
+token_T next_token(lexer_T *);
 
 #endif

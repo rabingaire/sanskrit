@@ -49,7 +49,7 @@ void fatalf(const int exit_code, const char *fmt, ...)
   va_end(args);
 }
 
-void printToken(Token token)
+void printToken(token_T token)
 {
   switch (token.type)
   {

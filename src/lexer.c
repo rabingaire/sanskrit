@@ -1,15 +1,15 @@
 #include "lexer.h"
 
-static inline char read_next_character(Lexer *);
-static inline char peek_character(Lexer *);
-static char *read_ident(Lexer *);
-static int64_t read_integer(Lexer *);
-static char *read_string(Lexer *);
-static void skip_whitespace(Lexer *);
+static inline char read_next_character(lexer_T *);
+static inline char peek_character(lexer_T *);
+static char *read_ident(lexer_T *);
+static int64_t read_integer(lexer_T *);
+static char *read_string(lexer_T *);
+static void skip_whitespace(lexer_T *);
 
-Lexer *new_lexer(char *input)
+lexer_T *new_lexer(char *input)
 {
-  Lexer *lex = (Lexer *)malloc(sizeof(Lexer));
+  lexer_T *lex = (lexer_T *)malloc(sizeof(lexer_T));
   lex->input = input;
   lex->position = 0;
   lex->read_position = 1;
@@ -17,7 +17,7 @@ Lexer *new_lexer(char *input)
   return lex;
 }
 
-static inline char read_next_character(Lexer *lex)
+static inline char read_next_character(lexer_T *lex)
 {
   lex->position = lex->read_position;
   lex->read_position++;
@@ -25,13 +25,13 @@ static inline char read_next_character(Lexer *lex)
   return lex->character;
 }
 
-static inline char peek_character(Lexer *lex)
+static inline char peek_character(lexer_T *lex)
 {
   size_t peek_position = lex->read_position;
   return lex->input[peek_position];
 }
 
-static char *read_ident(Lexer *lex)
+static char *read_ident(lexer_T *lex)
 {
   char *literal = "";
   while (true)
@@ -46,7 +46,7 @@ static char *read_ident(Lexer *lex)
   return literal;
 }
 
-static int64_t read_integer(Lexer *lex)
+static int64_t read_integer(lexer_T *lex)
 {
   int64_t literal = 0;
   while (true)
@@ -62,7 +62,7 @@ static int64_t read_integer(Lexer *lex)
   return literal;
 }
 
-static char *read_string(Lexer *lex)
+static char *read_string(lexer_T *lex)
 {
   char *literal = "";
   while (true)
@@ -78,7 +78,7 @@ static char *read_string(Lexer *lex)
   return literal;
 }
 
-static void skip_whitespace(Lexer *lex)
+static void skip_whitespace(lexer_T *lex)
 {
   while (lex->character == ' ' || lex->character == '\t' || lex->character == '\n' || lex->character == '\r')
   {
@@ -86,9 +86,9 @@ static void skip_whitespace(Lexer *lex)
   }
 }
 
-Token next_token(Lexer *lex)
+token_T next_token(lexer_T *lex)
 {
-  Token token;
+  token_T token;
 
   skip_whitespace(lex);
 

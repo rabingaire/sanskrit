@@ -7,19 +7,19 @@
 
 typedef struct
 {
-  TokenType type;
+  token_type_T type;
   union
   {
     int64_t integer_value;
     char *string_value;
     char *token_value;
   };
-} Token;
+} token_T;
 
-Token integer_token(TokenType, int64_t);
+token_T integer_token(token_type_T, int64_t);
 
-Token string_token(TokenType, char *);
+token_T string_token(token_type_T, char *);
 
-Token new_token(TokenType, char *);
+token_T new_token(token_type_T, char *);
 
 #endif
