@@ -14,6 +14,7 @@ OBJS=$(SOURCE:.c=.o)
 run: $(OBJS) $(HEADERS)
 	@$(CC) -o $(TARGET) $(OBJS)
 
+.PHONY: clean
 clean:
 	@rm $(OBJS)
 	@rm ./$(TARGET)
