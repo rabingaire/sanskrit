@@ -19,6 +19,8 @@ void *hash_get(hash_table_T *table, char *key)
   return NULL;
 }
 
+// TODO: If we use linear probing to handle collision
+// we have to soft delete value from hashmap
 void *hash_delete(hash_table_T *table, char *key)
 {
   size_t hash_value = _hash_function(table, key);
