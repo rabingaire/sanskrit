@@ -19,6 +19,18 @@ void *hash_get(hash_table_T *table, char *key)
   return NULL;
 }
 
+void *hash_delete(hash_table_T *table, char *key)
+{
+  size_t hash_value = _hash_function(table, key);
+  hash_element_T *element = table->elements[hash_value];
+  table->elements[hash_value] = NULL;
+  if (element)
+  {
+    return element->value;
+  }
+  return NULL;
+}
+
 // Private function
 
 // TODO: I am thinking of doing linear probing to handle collision.
