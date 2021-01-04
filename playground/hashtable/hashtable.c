@@ -1,5 +1,4 @@
 #include "hashtable.h"
-#include <stdio.h>
 
 hash_table_T *init_hash(size_t capacity)
 {
@@ -23,6 +22,7 @@ void *hash_get(hash_table_T *table, char *key)
 // Private function
 
 // TODO: I am thinking of doing linear probing to handle collision.
+// TODO: Add ability to pass int data type as key.
 void _hash_insert(hash_table_T *table, char *key, void *value)
 {
   hash_element_T *element = calloc(1, sizeof(struct HASH_ELEMENT));
