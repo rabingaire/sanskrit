@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
   printf("%d\n", (int)hash_insert(hash_table, "cat", 20));
   if (hash_insert(hash_table, "Cat", 30) == NULL)
   {
-    printf("Hash table is full\n");
+    printf("Can't insert\n");
   };
 
   printf("%d\n", (int)hash_get(hash_table, "rat"));
