@@ -1,3 +1,5 @@
+// TODO: ADD ability to set int as key
+
 #include "hashtable.h"
 
 hash_table_T *init_hash(size_t capacity)
