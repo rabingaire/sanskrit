@@ -8,6 +8,7 @@ typedef struct HASH_ELEMENT
 {
   char *key;
   void *value;
+  int deleted;
 } hash_element_T;
 
 typedef struct HASH_TABLE
@@ -28,7 +29,7 @@ void *hash_get(hash_table_T *table, char *key);
 void *hash_delete(hash_table_T *table, char *key);
 
 // Private functions
-void _hash_insert(hash_table_T *table, char *key, void *value);
+void *_hash_insert(hash_table_T *table, char *key, void *value);
 
 size_t _hash_function(hash_table_T *table, char *key);
 
