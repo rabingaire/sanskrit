@@ -31,6 +31,12 @@ void *hash_delete(hash_table_T *table, char *key);
 // Private functions
 void *_hash_insert(hash_table_T *table, char *key, void *value);
 
+void *_hash_insert_element(hash_table_T *table, hash_element_T *element);
+
+hash_element_T *_hash_get_element(hash_table_T *table, char *key);
+
 size_t _hash_function(hash_table_T *table, char *key);
+
+void _resize_hash_table(hash_table_T *table);
 
 #endif
