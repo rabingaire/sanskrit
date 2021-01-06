@@ -8,7 +8,10 @@ int main(int argc, char *argv[])
 
   printf("%d\n", (int)hash_insert(hash_table, "rat", 10));
   printf("%d\n", (int)hash_insert(hash_table, "cat", 20));
-  printf("%d\n", (int)hash_insert(hash_table, "Cat", 30));
+  if (hash_insert(hash_table, "Cat", 30) == NULL)
+  {
+    printf("Hash table is full\n");
+  };
 
   printf("%d\n", (int)hash_get(hash_table, "rat"));
   printf("%d\n", (int)hash_get(hash_table, "cat"));
@@ -18,5 +21,6 @@ int main(int argc, char *argv[])
   {
     printf("Value is null\n");
   }
+
   return 0;
 }
