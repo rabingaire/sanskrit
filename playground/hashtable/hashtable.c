@@ -125,6 +125,8 @@ void _resize_hash_table(hash_table_T *table)
     }
   }
 
+  free(table->elements);
+
   table->elements = new_hash_table->elements;
   table->capacity = new_hash_table->capacity;
 
