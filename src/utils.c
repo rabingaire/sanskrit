@@ -53,17 +53,17 @@ void printToken(token_T token)
   {
   case TOKEN_INTEGER:
   {
-    printf("Token type: %u \t Token literal: %lld\n", token.type, token.integer_value);
+    printf("Token type: %-25s Token literal: %lld\n", token_type_string[token.type], token.integer_value);
     break;
   }
   case TOKEN_STRING:
   {
-    printf("Token type: %u \t Token literal: %s\n", token.type, token.string_value);
+    printf("Token type: %-25s Token literal: %s\n", token_type_string[token.type], token.string_value);
     break;
   }
   default:
   {
-    printf("Token type: %u \t Token literal: %s\n", token.type, token.token_value);
+    printf("Token type: %-25s Token literal: %s\n", token_type_string[token.type], token.token_value);
     break;
   }
   }
